@@ -1,0 +1,41 @@
+body {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color:bisque;
+
+}
+
+.name {
+    display: flex;
+
+    
+
+
+}
+
+.name-inner{
+    margin: 10vh auto;
+}
+.gameboard {
+    height: 600px;
+
+}
+
+
+.gameboard-inner {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    margin: auto;
+    max-width: 300px;
+
+
+
+
+}
+
+.move {
+    border-style:solid;
+    border-color:rgb(255, 202, 123);
+    border-width: 3px;
+
+}
