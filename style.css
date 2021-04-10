@@ -39,3 +39,8 @@ body {
     border-width: 3px;
 
 }
+
+.move:hover {
+    background-color: rgb(255, 203, 125);
+    cursor: pointer;
+}
