@@ -1,6 +1,6 @@
 console.log("hello world")
-let board = [null, null, null, null, null, null, null, null, null]
-let board2 = ["o", "o", " ", " ", " ", "o", " ", "x", " "]
+let board = ["", "", "", "", "", "", "", "", ""]
+
 
 
 
@@ -12,20 +12,34 @@ let board2 = ["o", "o", " ", " ", " ", "o", " ", "x", " "]
 const gameBoardInner = document.querySelector(".gameboard-inner")
 
 
-for (let i = 0; i < board2.length; i++) {
-    const move = document.createElement('div')
+// for (let i = 0;i < board.length; i++) {
+//     const move = document.createElement('div')
 
-    move.classList.add("move")
+//     move.classList.add("move")
 
-    move.innerHTML += board2[i]
-    gameBoardInner.appendChild(move)
+//     move.innerHTML += board[i]
+//     gameBoardInner.appendChild(move)
+// }
+
+
+const moves = document.querySelectorAll(".move")
+moves.forEach(move => move.addEventListener("click", e => {
+    let position = move.id
+    
+    if (board[position] == '' | 'x' | 'o') {
+        board[position] = "o"
+        move.innerHTML += board[position]
 }
+}))
+//how do i sync a move div to array???
+
+
+//move.innerHTML += board2[i]
+//move.addEventListener('click', e => console.log(e))
+
 
 /* module function can be used right away
 factory functions have to be assigned to a var and used it 
-
-empty board 3x3
-//just exists
 
 
 
