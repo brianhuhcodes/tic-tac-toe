@@ -1,12 +1,14 @@
 body {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color:bisque;
+    font-size:50px;
 
 }
 
 .name {
     display: flex;
-
+    color:rgb(219, 168, 0);
+    text-shadow: 1px 2px #ff0000;
     
 
 
@@ -37,7 +39,10 @@ body {
     border-style:solid;
     border-color:rgb(255, 202, 123);
     border-width: 3px;
-
+    text-align:center;
+    font-size: 70px;
+    color: #e6b800;
+    text-shadow: 1px 2px rgb(107, 80, 40);
 }
 
 .move:hover {

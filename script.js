@@ -2,40 +2,62 @@ console.log("hello world")
 let board = ["", "", "", "", "", "", "", "", ""]
 
 
-
-
-// const gameBorad = (one, two) => {
-//     const random = () => console.log('random')
-//     return {one, two, random}
-// }
-
 const gameBoardInner = document.querySelector(".gameboard-inner")
 
 
-// for (let i = 0;i < board.length; i++) {
-//     const move = document.createElement('div')
-
-//     move.classList.add("move")
-
-//     move.innerHTML += board[i]
-//     gameBoardInner.appendChild(move)
-// }
-
-
 const moves = document.querySelectorAll(".move")
-moves.forEach(move => move.addEventListener("click", e => {
-    let position = move.id
+
+
+//to see which player is going next
+function count() {
+    let empty = 0
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] == "") {
+            empty++
+        }
+    }
+    if (empty % 2 == 0 ) {
+        return first
+    }
+    else {
+        return second
+    }
+    }
+
+//factory function???
+const gameTurn = () => {
+    const firstmove = moves.forEach(move => move.addEventListener("click", e => {
+        let position = move.id
+        
+        if (board[position] == '' | 'x' | 'o') {
+            board[position] = "o"
+            move.innerHTML += board[position]
+    }
+    }))
+
+    const secondmove = moves.forEach(move => move.addEventListener("click", e => {
+        let position = move.id
+        
+        if (board[position] == '' | 'x' | 'o') {
+            board[position] = "x"
+            move.innerHTML += board[position]
+    }
+    }))
+
     
-    if (board[position] == '' | 'x' | 'o') {
-        board[position] = "o"
-        move.innerHTML += board[position]
+    return {firstmove, secondmove}
 }
-}))
-//how do i sync a move div to array???
+
+gameTurn()
+const first = gameTurn.firstmove()
+const second = gameTurn.secondmove()
 
 
-//move.innerHTML += board2[i]
-//move.addEventListener('click', e => console.log(e))
+
+if ((board[0] && board[1]) && (board[0] && board[2]) || (board[3] && board[4]) && (board[3] && board[5]) || (board[6] && board[7]) && (board[6] && board[8]) || (board[0] && board[3]) && (board[0] && board[6]) || (board[1] && board[4]) && (board[1] && board[7]) || (board[2] && board[5]) && (board[2] && board[8]) || (board[0] && board[4]) && (board[0] && board[8]) || (board[2] && board[4]) && (board[2] && board[6])) {
+    //game over 
+    //cancel dom and show a sign maybe a sign below name class "gameover"
+}
 
 
 /* module function can be used right away
