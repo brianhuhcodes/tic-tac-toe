@@ -4,7 +4,7 @@ const gameboard = (() => {
     let board = [];
 
     //function to make players objects
-    const players = (name, turn, mark) => {
+    function players(name, turn, mark) {
         return { name, turn, mark }
     }
 
@@ -15,41 +15,41 @@ const gameboard = (() => {
     const moves = document.querySelectorAll(".move")
 
     //triggered rightaway to start the listening to click events
-    const move = () => {
-        moves.forEach(move => move.addEventListener("click", function newName() {
-            return marking(move)}))}
+    const move = (() => {
+        moves.forEach(move => move.addEventListener("click", markOuter))})()
     
     //should trigger when the 3 item line is formed
-    const gameOver = () => {
-        moves.forEach(move => move.removeEventListener("click", function newName() {
-            return marking(move)}))}
+    const removeEvent = () => {
+        moves.forEach(move => move.removeEventListener("click", markOuter))}
         
     
     //triggered after move() and updates board array and marks the board
-    const marking = (move) => {
-        let position = move.id
-        console.log('moveoutside')
-        if (board[position] === undefined && player1.turn === true) {
-            board[position] = player1.mark
-            move.innerHTML += board[position]
-            player1.turn = false
-            player2.turn = true
-        }
-        else if (board[position] === undefined && player2.turn === true) {
-            board[position] = player2.mark
-            move.innerHTML += board[position]
-            player2.turn = false
-            player1.turn = true
+    function markOuter() {
+        const marking = (() => {
+            let position = this.id
+            console.log('moveoutside')
+            if (board[position] === undefined && player1.turn === true) {
+                board[position] = player1.mark
+                this.innerHTML += board[position]
+                player1.turn = false
+                player2.turn = true
+            }
+            else if (board[position] === undefined && player2.turn === true) {
+                board[position] = player2.mark
+                this.innerHTML += board[position]
+                player2.turn = false
+                player1.turn = true
 
-        }
+            }
 
-        // takes o and x var from updated playerArrays()
-        const { o, x } = playerArrays()
+            // takes o and x var from updated playerArrays()
+            const { o, x } = playerArrays()
 
-        //check if won 
-        wincheck(o, x)
+            //check if won 
+            wincheck(o, x)
 
-        }
+        })()
+    }
     
     
     //updates the array
@@ -88,7 +88,8 @@ const gameboard = (() => {
             for (let i = 0; i<winCases.length; i++) {
                 if (winCases[i].every(h => o.includes(h))) {
                     console.log("true")
-                    gameOver()
+                    removeEvent()
+                    classChange()
                 }
                 else {
                     console.log("false")
@@ -98,7 +99,8 @@ const gameboard = (() => {
             for (let i = 0; i<winCases.length; i++) {
                 if (winCases[i].every(h => x.includes(h))) {
                     console.log("true")
-                    gameOver()
+                    removeEvent()
+                    classChange()
                 }
                 else {
                     console.log("false")
@@ -112,10 +114,12 @@ const gameboard = (() => {
         
 
     }
-
-
+    
+    const classChange = () => {
+        moves.forEach(move => move.className = "move-done")}
         
     
+
 
     return { move }
 })()
