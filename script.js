@@ -15,9 +15,9 @@ const gameboard = (() => {
     const moves = document.querySelectorAll(".move")
 
     //triggered rightaway to start the listening to click events
-    const move = (() => {
+    const move = () => {
         moves.forEach(move => move.addEventListener("click", function newName() {
-            return marking(move)}))})()
+            return marking(move)}))}
     
     //should trigger when the 3 item line is formed
     const gameOver = () => {
