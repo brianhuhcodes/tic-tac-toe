@@ -1,22 +1,32 @@
-
-
-
-//to see which player is going next
-
-
-//factory function???
+//factory function
 const gameboard = (() => {
+    //array to keep track
     let board = [];
+
+    //function to make players objects
     const players = (name, turn, mark) => {
         return { name, turn, mark }
     }
 
     const player1 = players('player1', true, "O");
     const player2 = players('player2', false, "X");
+
+    //global querySelelector for .move
     const moves = document.querySelectorAll(".move")
 
-    const move = () => {
-        moves.forEach(move => move.addEventListener("click", e => {
+    //triggered rightaway to start the listening to click events
+    const move = (() => {
+        moves.forEach(move => move.addEventListener("click", function newName() {
+            return marking(move)}))})()
+    
+    //should trigger when the 3 item line is formed
+    const gameOver = () => {
+        moves.forEach(move => move.removeEventListener("click", function newName() {
+            return marking(move)}))}
+        
+    
+    //triggered after move() and updates board array and marks the board
+    const marking = (move) => {
         let position = move.id
         console.log('moveoutside')
         if (board[position] === undefined && player1.turn === true) {
@@ -31,15 +41,18 @@ const gameboard = (() => {
             player2.turn = false
             player1.turn = true
 
+        }
 
-    }
+        // takes o and x var from updated playerArrays()
+        const { o, x } = playerArrays()
 
-    const { o, x } = playerArrays()
-    wincheck(o, x)
-    }))
-}
+        //check if won 
+        wincheck(o, x)
 
-
+        }
+    
+    
+    //updates the array
     const playerArrays = () => {
         let o = [];
         let x = [];
@@ -54,11 +67,10 @@ const gameboard = (() => {
                 x.push(i)
             }
         }
-        
         return { o, x }
     }
     
-
+    //check the array against the winCases
     const wincheck = (o, x) => {        
         const winCases = [
             [0,1,2],
@@ -71,22 +83,22 @@ const gameboard = (() => {
             [0,4,8]
         ];
 
+        //checks whether o has won
         function checkO(o) {       
             for (let i = 0; i<winCases.length; i++) {
                 if (winCases[i].every(h => o.includes(h))) {
-                    console.log("frue")
-                    return gameOver()
+                    console.log("true")
+                    gameOver()
                 }
                 else {
                     console.log("false")
                 }}}
-
+        //checks whether x has won
         function checkX(x) {
             for (let i = 0; i<winCases.length; i++) {
                 if (winCases[i].every(h => x.includes(h))) {
                     console.log("true")
-
-                    return gameOver()
+                    gameOver()
                 }
                 else {
                     console.log("false")
@@ -101,67 +113,20 @@ const gameboard = (() => {
 
     }
 
-    const gameOver = () => {
-        moves.forEach(move => move.removeEventListener("click", e => {
-            let position = move.id
-            if (board[position] === undefined && player1.turn === true) {
-                player1.turn = false
-                player2.turn = true
-            }
-            else if (board[position] === undefined && player2.turn === true) {
-                player2.turn = false
-                player1.turn = true
-            }}))}
+
         
     
 
     return { move }
 })()
 
-gameboard.move()
 
-
-
-// if ((board[0] && board[1]) && (board[0] && board[2]) || (board[3] && board[4]) && (board[3] && board[5]) || (board[6] && board[7]) && (board[6] && board[8]) || (board[0] && board[3]) && (board[0] && board[6]) || (board[1] && board[4]) && (board[1] && board[7]) || (board[2] && board[5]) && (board[2] && board[8]) || (board[0] && board[4]) && (board[0] && board[8]) || (board[2] && board[4]) && (board[2] && board[6])) {
-//     //game over 
+//     //gameover is not working
 //     //cancel dom and show a sign maybe a sign below name class "gameover"
-// }
+
 
 
 /* module function can be used right away
 factory functions have to be assigned to a var and used it 
-
-
-
-when first person click, o shows up
-//how to show o?
-
-second person's turn
-//alternating turns
-
-second person clicks, x shows up
-//how to show x?
-
-first person's turn
-//alternate the turn again
-
-fill in the array
-and when 3 line is formed then 
-
-game wins or lose
-
-
-so figure out the possible formation and pick out all the situation that wins.
-lets say   [o, x, o,
-            o, x, x
-            o,     ]
-this means that [o, x, o, o, x, x, o, null, null] is won by player o.
-
-if not null then you can't click
-
-if null then you can click
-the winning scenarios are 3 rows 3 columns and 2 crosses
-
-
 
  */
