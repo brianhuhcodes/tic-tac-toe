@@ -13,9 +13,9 @@ const gameboard = (() => {
 
     const player1 = players('player1', true, "O");
     const player2 = players('player2', false, "X");
+    const moves = document.querySelectorAll(".move")
 
     const move = () => {
-        const moves = document.querySelectorAll(".move")
         moves.forEach(move => move.addEventListener("click", e => {
         let position = move.id
         console.log('moveoutside')
@@ -31,11 +31,91 @@ const gameboard = (() => {
             player2.turn = false
             player1.turn = true
 
+
     }
+
+    const { o, x } = playerArrays()
+    wincheck(o, x)
     }))
 }
 
-    return { players, move }
+
+    const playerArrays = () => {
+        let o = [];
+        let x = [];
+
+
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === 'O') {
+                o.push(i)
+
+            }
+            else if (board[i] === 'X') {
+                x.push(i)
+            }
+        }
+        
+        return { o, x }
+    }
+    
+
+    const wincheck = (o, x) => {        
+        const winCases = [
+            [0,1,2],
+            [0,3,6],
+            [3,4,5],
+            [6,7,8],
+            [1,4,7],
+            [2,4,6],
+            [2,5,8],
+            [0,4,8]
+        ];
+
+        function checkO(o) {       
+            for (let i = 0; i<winCases.length; i++) {
+                if (winCases[i].every(h => o.includes(h))) {
+                    console.log("frue")
+                    return gameOver()
+                }
+                else {
+                    console.log("false")
+                }}}
+
+        function checkX(x) {
+            for (let i = 0; i<winCases.length; i++) {
+                if (winCases[i].every(h => x.includes(h))) {
+                    console.log("true")
+
+                    return gameOver()
+                }
+                else {
+                    console.log("false")
+                }
+            }}
+        
+        const oCheck = checkO(o)
+        const xCheck = checkX(x)
+        console.log(oCheck)
+        console.log(xCheck)
+        
+
+    }
+
+    const gameOver = () => {
+        moves.forEach(move => move.removeEventListener("click", e => {
+            let position = move.id
+            if (board[position] === undefined && player1.turn === true) {
+                player1.turn = false
+                player2.turn = true
+            }
+            else if (board[position] === undefined && player2.turn === true) {
+                player2.turn = false
+                player1.turn = true
+            }}))}
+        
+    
+
+    return { move }
 })()
 
 gameboard.move()
