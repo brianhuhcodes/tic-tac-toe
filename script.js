@@ -7,8 +7,28 @@ const gameboard = (() => {
         return { name, turn, mark }
     }
 
-    const player1 = players('player1', true, "O");
-    const player2 = players('player2', false, "X");
+    // const {player1, player2} = playerGenO()
+
+
+    //const { player1, player2 } = playerGenO()///how to passively call playerGenX?
+    let player1 
+    let player2
+    function playerGenO() {
+        
+        player1 = players('Player O', true, "O")
+        player2 = players('Player X', false, "X")
+    }
+
+
+    
+    function playerGenX() {
+        console.log("playerGenX")
+        player1 = players('Player X', true, "X")
+        player2 = players('Player O', false, "O")
+    }
+    
+    
+    // const player1 = players('player1', true, "O");
     
     //global querySelelector for .move
     const moves = document.querySelectorAll(".move")
@@ -136,7 +156,7 @@ const gameboard = (() => {
     
 
 
-    return { move, boardReset, players }
+    return { move, boardReset, players, playerGenO, playerGenX }
 })()
 
 
@@ -196,7 +216,7 @@ const displayController = (() => {
         movebefore.forEach(mb => mb.className = "move")
         // const player1 = gameboard.players("Player 1", true, "O") //how do i pass these objects?
         // const player2 = gameboard.players("Player 2", false, "X")
-
+        gameboard.playerGenO()
         gameboard.move()
         start.remove()
 
@@ -207,6 +227,7 @@ const displayController = (() => {
         movebefore.forEach(mb => mb.className = "move")
         // const player1 = gameboard.players("Player 1", true, "X")
         // const player2 = gameboard.players("Player 2", false, "O")
+        gameboard.playerGenX()
         gameboard.move()
         start.remove()
         
@@ -238,5 +259,7 @@ restart pressed
 game starts without asking to enter names
 
 
+
+change the board move classes to mutliple classes
  */
 
