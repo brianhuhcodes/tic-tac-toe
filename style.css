@@ -120,6 +120,24 @@ body {
     cursor: pointer;
 }
 
-.startinner {
+.OXbtnouter {
     display: flex;
+}
+
+.chooseouter {
+    display: flex;
+    margin: 30px auto 100px auto;
+    text-align: center;
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+}
+
+.choose {
+    font-size: 40px;
+    color: #ff7474;
+    text-shadow: 1px 2px rgb(223, 174, 0);
+    
 }
