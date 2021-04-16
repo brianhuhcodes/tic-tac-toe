@@ -190,6 +190,8 @@ const displayController = (() => {
     
     const O = document.querySelector(".Obtn")
     const X = document.querySelector(".Xbtn")
+    const start = document.querySelector('.start')
+
 
     O.addEventListener("click", () => {
         const movebefore = document.querySelectorAll(".move-before")
@@ -198,8 +200,8 @@ const displayController = (() => {
         // const player2 = gameboard.players("Player 2", false, "X")
 
         gameboard.move()
-        O.remove()
-        X.remove()
+        start.remove()
+
         
     })
     X.addEventListener("click", () => {
@@ -208,8 +210,7 @@ const displayController = (() => {
         // const player1 = gameboard.players("Player 1", true, "X")
         // const player2 = gameboard.players("Player 2", false, "O")
         gameboard.move()
-        O.remove()
-        X.remove()
+        start.remove()
         
     })
 })()
