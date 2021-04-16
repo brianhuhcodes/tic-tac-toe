@@ -92,7 +92,7 @@ body {
     cursor: pointer;
 }
 
-.Obtn {
+.OXbtn {
     background-color: #d43200;
     border: none;
     color: white;
@@ -106,19 +106,6 @@ body {
     cursor: pointer;
 }
 
-.Xbtn {
-    background-color: #d43200;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    margin: 4px auto;
-    cursor: pointer;
-}
 
 .OXbtnouter {
     display: flex;

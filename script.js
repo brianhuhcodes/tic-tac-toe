@@ -7,8 +7,8 @@ const gameboard = (() => {
         return { name, turn, mark }
     }
 
-    // const player1 = players('player1', true, "O");
-    // const player2 = players('player2', false, "X");
+    const player1 = players('player1', true, "O");
+    const player2 = players('player2', false, "X");
     
     //global querySelelector for .move
     const moves = document.querySelectorAll(".move")
@@ -132,7 +132,7 @@ const gameboard = (() => {
         board = []
     }
 
-
+    
     
 
 
@@ -187,11 +187,9 @@ const displayController = (() => {
 
     
     (function gameStart() {
-    
-    const O = document.querySelector(".Obtn")
-    const X = document.querySelector(".Xbtn")
-    const start = document.querySelector('.start')
-
+    const start = document.querySelector(".start")
+    const O = document.querySelector(".OXbtn.O")
+    const X = document.querySelector(".OXbtn.X")
 
     O.addEventListener("click", () => {
         const movebefore = document.querySelectorAll(".move-before")
