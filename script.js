@@ -2,24 +2,27 @@
 const gameboard = (() => {
     //array to keep track
     let board = [];
-
     //function to make players objects
     function players(name, turn, mark) {
         return { name, turn, mark }
     }
 
-    const player1 = players('player1', true, "O");
-    const player2 = players('player2', false, "X");
-
+    // const player1 = players('player1', true, "O");
+    // const player2 = players('player2', false, "X");
+    
     //global querySelelector for .move
     const moves = document.querySelectorAll(".move")
+    
+    //triggered to start listening for the game
+    const move = () => {
+        const moves = document.querySelectorAll(".move")
+        moves.forEach(move => move.addEventListener("click", markOuter))}
 
-    //triggered rightaway to start the listening to click events
-    const move = (() => {
-        moves.forEach(move => move.addEventListener("click", markOuter))})()
+
     
     //should trigger when the 3 item line is formed
     const removeEvent = () => {
+        const moves = document.querySelectorAll(".move")
         moves.forEach(move => move.removeEventListener("click", markOuter))}
         
     
@@ -90,6 +93,7 @@ const gameboard = (() => {
                     console.log("true")
                     removeEvent()
                     classChange()
+                    displayController.gameWon(player1.name)
                 }
                 else {
                     console.log("false")
@@ -101,6 +105,7 @@ const gameboard = (() => {
                     console.log("true")
                     removeEvent()
                     classChange()
+                    displayController.gameWon(player2.name)
                 }
                 else {
                     console.log("false")
@@ -116,21 +121,123 @@ const gameboard = (() => {
     }
     
     const classChange = () => {
+        const moves = document.querySelectorAll(".move")
         moves.forEach(move => move.className = "move-done")}
         
+        // why does it say it is not initialized? displayController.gameStart()
+    
+    
+
+    const boardReset = () => {
+        board = []
+    }
+
+
     
 
 
-    return { move }
+    return { move, boardReset, players }
 })()
 
 
-//     //gameover is not working
-//     //cancel dom and show a sign maybe a sign below name class "gameover"
+
+
+
+const displayController = (() => {
+    const gameboardDiv = document.querySelector(".gameboard")
+
+    function gameWon(name) {
+        const gameboardDiv = document.querySelector(".gameboard")
+        const gameWon = document.createElement("div")
+        gameWon.innerHTML = `${name} won`
+        gameWon.className = 'gamewon'
+        gameboardDiv.prepend(gameWon)
+        gameRestart()
+    }
+    function gameLost() {
+        const gameLost = document.createElement("div")
+        gameLost.innerHTML = `You lost`
+        gameLost.className = 'gamelost'
+        gameboardDiv.append(gameLost)
+        
+    }
+    
+    function gameRestart() {
+        const gameRestart = document.createElement('button')
+        gameRestart.className = 'btn'
+        gameRestart.innerHTML = `Restart`
+        gameboardDiv.prepend(gameRestart)
+        gameRestart.addEventListener("click", e => {
+            reset()
+            gameRestart.remove()
+        })
+
+        
+    }
+
+    function reset() {
+        const movedones = document.querySelectorAll(".move-done")
+        movedones.forEach(md => md.innerHTML = '')
+        gameboard.boardReset()
+        const gamewon = document.querySelector('.gamewon')
+        gamewon.remove()
+        movedones.forEach(md => md.className = "move")
+        gameboard.move()
+    }
+
+    
+    (function gameStart() {
+    
+    const O = document.querySelector(".Obtn")
+    const X = document.querySelector(".Xbtn")
+
+    O.addEventListener("click", () => {
+        const movebefore = document.querySelectorAll(".move-before")
+        movebefore.forEach(mb => mb.className = "move")
+        // const player1 = gameboard.players("Player 1", true, "O") //how do i pass these objects?
+        // const player2 = gameboard.players("Player 2", false, "X")
+
+        gameboard.move()
+        O.remove()
+        X.remove()
+        
+    })
+    X.addEventListener("click", () => {
+        const movebefore = document.querySelectorAll(".move-before")
+        movebefore.forEach(mb => mb.className = "move")
+        // const player1 = gameboard.players("Player 1", true, "X")
+        // const player2 = gameboard.players("Player 2", false, "O")
+        gameboard.move()
+        O.remove()
+        X.remove()
+        
+    })
+})()
+
+    
+    
+    return { gameWon }
+})()
 
 
 
 /* module function can be used right away
 factory functions have to be assigned to a var and used it 
 
+
+//still use factory function?
+//message to show winner at the end 
+//start and restart 
+//add name
+
+start button
+start pressed => ask to enter names
+game starts
+
+ends
+restart pressed
+game starts without asking to enter names
+
+
  */
+

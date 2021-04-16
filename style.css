@@ -50,6 +50,7 @@ body {
     cursor: pointer;
 }
 
+
 .move-done {
     border-style:solid;
     border-color:rgb(255, 202, 123);
@@ -58,9 +59,67 @@ body {
     font-size: 70px;
     color: #e6b800;
     text-shadow: 1px 2px rgb(107, 80, 40);
+    opacity: 0.15;
 }
 
 .move-done:hover {
     background-color: rgb(255, 203, 125);
 
+}
+
+.gamewon {
+    font-size: 40px;
+    color: rgb(255, 82, 82);
+    text-shadow: 1px 2px rgb(107, 80, 40);
+    text-align:center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 50px auto;
+
+}
+
+.btn {
+    background-color: #d43200;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    margin: 4px auto;
+    cursor: pointer;
+}
+
+.Obtn {
+    background-color: #d43200;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin: 4px auto;
+    cursor: pointer;
+}
+
+.Xbtn {
+    background-color: #d43200;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin: 4px auto;
+    cursor: pointer;
+}
+
+.startinner {
+    display: flex;
 }
