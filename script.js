@@ -131,7 +131,6 @@ const gameboard = (() => {
                     removeEvent()
                     classChange()
                     turndiv.style.visibility = "hidden";
-                    turndiv.innerHTML = ""
                     if (player1.name == "Player O") {
                     displayController.gameWon(player1.name)
                         return
@@ -231,6 +230,7 @@ const displayController = (() => {
     function reset() {
         const movedones = document.querySelectorAll(".move-done")
         const turndiv = document.querySelector(".turn")
+        console.log(turndiv)
         turndiv.style.visibility = "visible"
         movedones.forEach(md => md.innerHTML = '')
         gameboard.boardReset()
