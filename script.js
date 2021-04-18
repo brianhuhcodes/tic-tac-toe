@@ -11,20 +11,33 @@ const gameboard = (() => {
 
 
     //const { player1, player2 } = playerGenO()///how to passively call playerGenX?
+
     let player1 
     let player2
-    function playerGenO() {
-        
-        player1 = players('Player O', true, "O")
-        player2 = players('Player X', false, "X")
+    function playerGenO(first, second) {
+        player1 = players(first, true, "O")
+        player2 = players(second, false, "X")
+        if (first == "dft") {
+            player1 = players('Player O', true, "O")
+        }
+        if (second == "dft") {
+            player2 = players('Player X', false, "X")
+        }      
     }
 
+    function playerGenX(first, second) {
+        player1 = players('first', true, "X")
+        player2 = players('second', false, "O")
+        if (first == "dft") {
+            player1 = players('Player X', true, "X")
+        }
+        if (second == "dft") {
+            player2 = players('Player O', false, "O")
+        }  
+            // player1.name = name1.value
 
-    
-    function playerGenX() {
-        console.log("playerGenX")
-        player1 = players('Player X', true, "X")
-        player2 = players('Player O', false, "O")
+            // player2.name = name2.value
+
     }
     
     
@@ -229,15 +242,27 @@ const displayController = (() => {
     const start = document.querySelector(".start")
     const O = document.querySelector(".OXbtn.O")
     const X = document.querySelector(".OXbtn.X")
-    const name1 = document.querySelector(".name1")
-    const name2 = document.querySelector(".name2")
+
+    
 
     O.addEventListener("click", () => {
         const movebefore = document.querySelectorAll(".move-before")
         movebefore.forEach(mb => mb.className = "move")
         // const player1 = gameboard.players("Player 1", true, "O") //how do i pass these objects?
         // const player2 = gameboard.players("Player 2", false, "X")
-        gameboard.playerGenO()
+        const name1 = document.querySelector("#name1")
+        const name2 = document.querySelector("#name2")
+        let name1value = name1.value
+        let name2value = name2.value
+
+        if (name1value == "") {
+            name1value = "dft"
+        }
+        if (name2value == "") {
+            name2value = "dft"
+        }
+
+        gameboard.playerGenO(name1value, name2value)
         gameboard.move()
         start.remove()
 
@@ -248,7 +273,18 @@ const displayController = (() => {
         movebefore.forEach(mb => mb.className = "move")
         // const player1 = gameboard.players("Player 1", true, "X")
         // const player2 = gameboard.players("Player 2", false, "O")
-        gameboard.playerGenX()
+        const name1 = document.querySelector("#name1")
+        const name2 = document.querySelector("#name2")
+        let name1value = name1.value
+        let name2value = name2.value
+        if (name1value == "") {
+            name1value = "dft"
+        }
+        if (name2value == "") {
+            name2value = "dft"
+        }
+
+        gameboard.playerGenX(name1value, name2value)
         gameboard.move()
         start.remove()
         
