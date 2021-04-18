@@ -50,7 +50,6 @@ const gameboard = (() => {
     function markOuter() {
         const marking = (() => {
             let position = this.id
-            console.log('moveoutside')
             if (board[position] === undefined && player1.turn === true) {
                 board[position] = player1.mark
                 this.innerHTML += board[position]
@@ -107,35 +106,39 @@ const gameboard = (() => {
         ];
 
         //checks whether o has won
-        function checkO(o) {       
+        function checkOX(o, x) {   
+
             for (let i = 0; i<winCases.length; i++) {
                 if (winCases[i].every(h => o.includes(h))) {
-                    console.log("true")
+                    console.log("var O")
                     removeEvent()
                     classChange()
+                    console.log(player1.name)
+                    if (player1.name == "Player O") {
                     displayController.gameWon(player1.name)
+                    }
+                    else {
+                    displayController.gameWon(player2.name)}
                 }
-                else {
-                    console.log("false")
-                }}}
-        //checks whether x has won
-        function checkX(x) {
-            for (let i = 0; i<winCases.length; i++) {
-                if (winCases[i].every(h => x.includes(h))) {
-                    console.log("true")
+                else if (winCases[i].every(h => x.includes(h))) {
+                    console.log("var X")
                     removeEvent()
                     classChange()
-                    displayController.gameWon(player2.name)
-                }
-                else {
-                    console.log("false")
+                    if (player1.name == "Player X") {
+                        displayController.gameWon(player1.name)
+                        }
+                    else {
+                        console.log("O")
+                        displayController.gameWon(player2.name)
+                    }
                 }
             }}
-        
-        const oCheck = checkO(o)
-        const xCheck = checkX(x)
-        console.log(oCheck)
-        console.log(xCheck)
+        //checks whether x has won
+
+        const oxCheck = checkOX(o, x)
+        //const xCheck = checkX(x)
+        console.log(oxCheck)
+        //console.log(xCheck)
         
 
     }
