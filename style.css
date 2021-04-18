@@ -107,8 +107,29 @@ body {
 }
 
 
+.Oouter {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color: #ff7474;
+    text-shadow: 1px 2px rgb(223, 174, 0);
+    text-align: center;
+}
+
+.Xouter {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color: #ff7474;
+    text-shadow: 1px 2px rgb(223, 174, 0);
+    text-align: center;
+}
+
 .OXbtnouter {
     display: flex;
+    margin: auto auto;
+    column-gap: 40px;
+    flex-wrap: wrap;
 }
 
 .chooseouter {
@@ -127,4 +148,13 @@ body {
     color: #ff7474;
     text-shadow: 1px 2px rgb(223, 174, 0);
     
+}
+
+.nameouter {
+    display: flex;
+}
+
+input {
+    display: flex;
+    margin: 10px;
 }
