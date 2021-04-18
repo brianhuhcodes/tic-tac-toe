@@ -9,8 +9,10 @@ const gameboard = (() => {
 
     // const {player1, player2} = playerGenO()
 
+    
+    //global querySelector for .turn
+    const turndiv = document.querySelector(".turn")
 
-    //const { player1, player2 } = playerGenO()///how to passively call playerGenX?
 
     let player1 
     let player2
@@ -22,7 +24,8 @@ const gameboard = (() => {
         }
         if (second == "dft") {
             player2 = players('Player X', false, "X")
-        }      
+        }
+        turndiv.innerHTML = `${player1.name}'s turn`
     }
 
     function playerGenX(first, second) {
@@ -33,16 +36,14 @@ const gameboard = (() => {
         }
         if (second == "dft") {
             player2 = players('Player O', false, "O")
-        }  
-            // player1.name = name1.value
-
-            // player2.name = name2.value
-
+        }
+        turndiv.innerHTML = `${player1.name}'s turn`
     }
     
     
     // const player1 = players('player1', true, "O");
-    
+
+
     //global querySelelector for .move
     const moves = document.querySelectorAll(".move")
     
@@ -64,12 +65,15 @@ const gameboard = (() => {
         const marking = (() => {
             let position = this.id
             if (board[position] === undefined && player1.turn === true) {
+                turndiv.innerHTML = `${player2.name}'s turn`
                 board[position] = player1.mark
                 this.innerHTML += board[position]
                 player1.turn = false
                 player2.turn = true
+
             }
             else if (board[position] === undefined && player2.turn === true) {
+                turndiv.innerHTML = `${player1.name}'s turn`
                 board[position] = player2.mark
                 this.innerHTML += board[position]
                 player2.turn = false
@@ -126,7 +130,8 @@ const gameboard = (() => {
                     console.log("var O")
                     removeEvent()
                     classChange()
-                    console.log(player1.name)
+                    turndiv.style.visibility = "hidden";
+                    turndiv.innerHTML = ""
                     if (player1.name == "Player O") {
                     displayController.gameWon(player1.name)
                         return
@@ -139,6 +144,8 @@ const gameboard = (() => {
                     console.log("var X")
                     removeEvent()
                     classChange()
+                    turndiv.style.visibility = "hidden";
+
                     if (player1.name == "Player X") {
                         displayController.gameWon(player1.name)
                         return
@@ -206,19 +213,13 @@ const displayController = (() => {
         gameboardDiv.prepend(gameWon)
         gameRestart()
     }
-    function gameLost() {
-        const gameLost = document.createElement("div")
-        gameLost.innerHTML = `You lost`
-        gameLost.className = 'gamelost'
-        gameboardDiv.append(gameLost)
-        
-    }
     
     function gameRestart() {
         const gameRestart = document.createElement('button')
         gameRestart.className = 'btn'
         gameRestart.innerHTML = `Restart`
         gameboardDiv.prepend(gameRestart)
+        
         gameRestart.addEventListener("click", e => {
             reset()
             gameRestart.remove()
@@ -229,6 +230,8 @@ const displayController = (() => {
 
     function reset() {
         const movedones = document.querySelectorAll(".move-done")
+        const turndiv = document.querySelector(".turn")
+        turndiv.style.visibility = "visible"
         movedones.forEach(md => md.innerHTML = '')
         gameboard.boardReset()
         const gamewon = document.querySelector('.gamewon')
@@ -261,7 +264,6 @@ const displayController = (() => {
         if (name2value == "") {
             name2value = "dft"
         }
-
         gameboard.playerGenO(name1value, name2value)
         gameboard.move()
         start.remove()
@@ -275,6 +277,7 @@ const displayController = (() => {
         // const player2 = gameboard.players("Player 2", false, "O")
         const name1 = document.querySelector("#name1")
         const name2 = document.querySelector("#name2")
+
         let name1value = name1.value
         let name2value = name2.value
         if (name1value == "") {
@@ -299,23 +302,7 @@ const displayController = (() => {
 
 
 /* module function can be used right away
-factory functions have to be assigned to a var and used it 
 
-
-//message to show winner at the end 
-//start and restart 
-//add name
-
-start button
-start pressed => ask to enter names
-game starts
-
-ends
-restart pressed
-game starts without asking to enter names
-
-
-
-change the board move classes to mutliple classes
+Show who is playing first when game is starting again
  */
 
