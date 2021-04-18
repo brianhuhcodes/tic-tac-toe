@@ -116,9 +116,11 @@ const gameboard = (() => {
                     console.log(player1.name)
                     if (player1.name == "Player O") {
                     displayController.gameWon(player1.name)
+                        return
                     }
                     else {
-                    displayController.gameWon(player2.name)}
+                    displayController.gameWon(player2.name)
+                        return }
                 }
                 else if (winCases[i].every(h => x.includes(h))) {
                     console.log("var X")
@@ -126,13 +128,24 @@ const gameboard = (() => {
                     classChange()
                     if (player1.name == "Player X") {
                         displayController.gameWon(player1.name)
+                        return
                         }
                     else {
                         console.log("O")
                         displayController.gameWon(player2.name)
+                        return
                     }
                 }
-            }}
+                else if ((o.length + x.length) == 9) {
+                    removeEvent()
+                    classChange()
+                    displayController.gameWon("Draw")
+                    return
+                }
+            }
+
+
+        }
         //checks whether x has won
 
         const oxCheck = checkOX(o, x)
@@ -172,7 +185,10 @@ const displayController = (() => {
     function gameWon(name) {
         const gameboardDiv = document.querySelector(".gameboard")
         const gameWon = document.createElement("div")
-        gameWon.innerHTML = `${name} won`
+        if (name === "Draw") {
+            gameWon.innerHTML = name
+        }
+        else {gameWon.innerHTML = `${name} won`}
         gameWon.className = 'gamewon'
         gameboardDiv.prepend(gameWon)
         gameRestart()
@@ -213,6 +229,8 @@ const displayController = (() => {
     const start = document.querySelector(".start")
     const O = document.querySelector(".OXbtn.O")
     const X = document.querySelector(".OXbtn.X")
+    const name1 = document.querySelector(".name1")
+    const name2 = document.querySelector(".name2")
 
     O.addEventListener("click", () => {
         const movebefore = document.querySelectorAll(".move-before")
@@ -248,7 +266,6 @@ const displayController = (() => {
 factory functions have to be assigned to a var and used it 
 
 
-//still use factory function?
 //message to show winner at the end 
 //start and restart 
 //add name
