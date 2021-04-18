@@ -230,7 +230,6 @@ const displayController = (() => {
     function reset() {
         const movedones = document.querySelectorAll(".move-done")
         const turndiv = document.querySelector(".turn")
-        console.log(turndiv)
         turndiv.style.visibility = "visible"
         movedones.forEach(md => md.innerHTML = '')
         gameboard.boardReset()
