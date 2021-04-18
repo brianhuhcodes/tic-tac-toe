@@ -7,8 +7,6 @@ const gameboard = (() => {
         return { name, turn, mark }
     }
 
-    // const {player1, player2} = playerGenO()
-
     
     //global querySelector for .turn
     const turndiv = document.querySelector(".turn")
@@ -70,7 +68,6 @@ const gameboard = (() => {
                 this.innerHTML += board[position]
                 player1.turn = false
                 player2.turn = true
-
             }
             else if (board[position] === undefined && player2.turn === true) {
                 turndiv.innerHTML = `${player1.name}'s turn`
@@ -78,7 +75,6 @@ const gameboard = (() => {
                 this.innerHTML += board[position]
                 player2.turn = false
                 player1.turn = true
-
             }
 
             // takes o and x var from updated playerArrays()
@@ -96,11 +92,9 @@ const gameboard = (() => {
         let o = [];
         let x = [];
 
-
         for (let i = 0; i < 9; i++) {
             if (board[i] === 'O') {
                 o.push(i)
-
             }
             else if (board[i] === 'X') {
                 x.push(i)
@@ -168,27 +162,16 @@ const gameboard = (() => {
         //checks whether x has won
 
         const oxCheck = checkOX(o, x)
-        //const xCheck = checkX(x)
         console.log(oxCheck)
-        //console.log(xCheck)
-        
-
     }
     
     const classChange = () => {
         const moves = document.querySelectorAll(".move")
         moves.forEach(move => move.className = "move-done")}
-        
-        // why does it say it is not initialized? displayController.gameStart()
-    
-    
 
     const boardReset = () => {
         board = []
     }
-
-    
-    
 
 
     return { move, boardReset, players, playerGenO, playerGenX }
@@ -250,13 +233,10 @@ const displayController = (() => {
     O.addEventListener("click", () => {
         const movebefore = document.querySelectorAll(".move-before")
         movebefore.forEach(mb => mb.className = "move")
-        // const player1 = gameboard.players("Player 1", true, "O") //how do i pass these objects?
-        // const player2 = gameboard.players("Player 2", false, "X")
         const name1 = document.querySelector("#name1")
         const name2 = document.querySelector("#name2")
         let name1value = name1.value
         let name2value = name2.value
-
         if (name1value == "") {
             name1value = "dft"
         }
@@ -272,11 +252,8 @@ const displayController = (() => {
     X.addEventListener("click", () => {
         const movebefore = document.querySelectorAll(".move-before")
         movebefore.forEach(mb => mb.className = "move")
-        // const player1 = gameboard.players("Player 1", true, "X")
-        // const player2 = gameboard.players("Player 2", false, "O")
         const name1 = document.querySelector("#name1")
         const name2 = document.querySelector("#name2")
-
         let name1value = name1.value
         let name2value = name2.value
         if (name1value == "") {
@@ -297,11 +274,4 @@ const displayController = (() => {
     
     return { gameWon }
 })()
-
-
-
-/* module function can be used right away
-
-Show who is playing first when game is starting again
- */
 
